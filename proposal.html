@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
   <title>A Special Proposal ❤️</title>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -13,53 +19,120 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #fff0f5;
+      background: linear-gradient(
+        135deg,
+        #fff0f5,
+        #ffe1eb
+      );
       color: #333;
-      text-align: center;
     }
 
     .container {
       max-width: 700px;
       margin: auto;
-      padding: 30px 20px;
+      padding: 25px 18px 60px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 25px 10px;
+    }
+
+    .heart {
+      font-size: 55px;
+      animation: heartbeat 1.3s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.15);
+      }
     }
 
     h1 {
       color: #e91e63;
+      font-size: 32px;
     }
 
     .card {
       background: white;
       padding: 25px;
       margin: 20px 0;
-      border-radius: 20px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      border-radius: 22px;
+      box-shadow:
+        0 8px 25px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      color: #e91e63;
+    }
+
+    #message {
+      font-size: 18px;
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .reason {
+      background: #fff0f5;
+      padding: 14px;
+      margin: 10px 0;
+      border-radius: 14px;
+      text-align: left;
+      font-size: 16px;
+    }
+
+    .photos {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
     }
 
     .photo {
-      max-width: 100%;
-      border-radius: 15px;
-      margin: 10px 0;
+      width: 100%;
+      max-height: 500px;
+      object-fit: cover;
+      border-radius: 18px;
+      display: none;
+    }
+
+    .question {
+      text-align: center;
+    }
+
+    .question h2 {
+      color: #e91e63;
     }
 
     .buttons {
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 15px;
       margin-top: 25px;
+      min-height: 60px;
     }
 
     button {
       border: none;
-      padding: 14px 30px;
+      padding: 13px 24px;
       border-radius: 30px;
-      font-size: 18px;
+      font-size: 17px;
       cursor: pointer;
+      transition: 0.2s;
     }
 
     .yes {
       background: #e91e63;
       color: white;
+    }
+
+    .yes:hover {
+      transform: scale(1.05);
     }
 
     .no {
@@ -69,74 +142,335 @@
 
     #success {
       display: none;
+      text-align: center;
     }
+
+    #finalMessage {
+      font-size: 19px;
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+
+    .floating {
+      position: fixed;
+      pointer-events: none;
+      animation: floatUp 5s linear forwards;
+      font-size: 20px;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      to {
+        transform: translateY(-100vh);
+        opacity: 0;
+      }
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <div class="card">
-      <h1>💌 A Special Message For You</h1>
-      <p id="message">
-        Your special proposal will appear here.
-      </p>
-    </div>
 
-    <div class="card">
-      <h2>❤️ Reasons</h2>
-      <p id="reasons">
-        Your reasons will appear here.
-      </p>
-    </div>
+  <div class="hero">
 
-    <div class="card">
-      <h2>Will you be my girlfriend? 💕</h2>
+    <div class="heart">❤️</div>
 
-      <div class="buttons">
-        <button class="no" onclick="sayNo()">No</button>
-        <button class="yes" onclick="sayYes()">Yes ❤️</button>
-      </div>
-    </div>
+    <h1>
+      A Special Message For
+      <span id="name">You</span>
+    </h1>
 
-    <div class="card" id="success">
-      <h1>🎉 Congratulations! 🎉</h1>
+  </div>
 
-      <p id="finalMessage">
-        Your congratulations message will appear here.
-      </p>
 
-      <p>❤️ ❤️ ❤️</p>
+  <div class="card">
+
+    <h2>💌 Something I Want To Tell You</h2>
+
+    <p id="message">
+      Your special message will appear here.
+    </p>
+
+  </div>
+
+
+  <div class="card">
+
+    <h2>❤️ Reasons</h2>
+
+    <div id="reasons">
     </div>
 
   </div>
+
+
+  <div class="card">
+
+    <h2>📸 Memories</h2>
+
+    <div class="photos">
+
+      <img id="photo1" class="photo">
+
+      <img id="photo2" class="photo">
+
+      <img id="photo3" class="photo">
+
+    </div>
+
+  </div>
+
+
+  <div class="card question">
+
+    <h2>
+      Will you be my girlfriend? 💕
+    </h2>
+
+    <div class="buttons">
+
+      <button
+        class="yes"
+        onclick="sayYes()">
+        Yes ❤️
+      </button>
+
+      <button
+        class="no"
+        id="noButton"
+        onclick="sayNo()">
+        No
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="card" id="success">
+
+    <div class="heart">
+      💖
+    </div>
+
+    <h1>
+      YAY!!! 🎉
+    </h1>
+
+    <p id="finalMessage">
+      Congratulations!
+    </p>
+
+    <p>
+      ❤️ 💕 ❤️ 💕 ❤️
+    </p>
+
+  </div>
+
+
+</div>
+
+
 <script>
-  const params = new URLSearchParams(window.location.search);
 
-  document.getElementById("message").textContent =
-    params.get("message") || "Your special proposal will appear here.";
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
 
-  document.getElementById("reasons").textContent =
-    params.get("reasons") || "Your reasons will appear here.";
 
-  document.getElementById("finalMessage").textContent =
-    params.get("final") || "Your congratulations message will appear here.";
+const name =
+  params.get("name");
 
-  function sayYes() {
-    document.getElementById("success").style.display = "block";
+const message =
+  params.get("message");
 
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: "smooth"
-    });
+const reasons =
+  params.get("reasons");
+
+const finalMessage =
+  params.get("final");
+
+
+/* NAME */
+
+if (name) {
+
+  document.getElementById("name")
+    .textContent = name;
+
+}
+
+
+/* MESSAGE */
+
+if (message) {
+
+  document.getElementById("message")
+    .textContent = message;
+
+}
+
+
+/* REASONS */
+
+if (reasons) {
+
+  const reasonsContainer =
+    document.getElementById("reasons");
+
+  const reasonList =
+    reasons.split("||");
+
+  reasonList.forEach(function(reason) {
+
+    const div =
+      document.createElement("div");
+
+    div.className = "reason";
+
+    div.textContent =
+      "❤️ " + reason;
+
+    reasonsContainer.appendChild(div);
+
+  });
+
+}
+
+
+/* FINAL MESSAGE */
+
+if (finalMessage) {
+
+  document.getElementById("finalMessage")
+    .textContent = finalMessage;
+
+}
+
+
+/* PHOTOS */
+
+function loadPhoto(id) {
+
+  const url =
+    params.get(id);
+
+  if (url && url.trim() !== "") {
+
+    const img =
+      document.getElementById(id);
+
+    img.src = url;
+
+    img.style.display = "block";
+
+    img.onerror = function() {
+
+      img.style.display = "none";
+
+    };
+
   }
 
-  function sayNo() {
-    alert("Are you sure? 🥺");
+}
+
+loadPhoto("photo1");
+loadPhoto("photo2");
+loadPhoto("photo3");
+
+
+/* YES */
+
+function sayYes() {
+
+  document.getElementById("success")
+    .style.display = "block";
+
+  createHearts();
+
+  window.scrollTo({
+
+    top:
+      document.body.scrollHeight,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+/* NO */
+
+function sayNo() {
+
+  const button =
+    document.getElementById("noButton");
+
+  const maxX = 120;
+
+  const maxY = 50;
+
+  const x =
+    Math.random() * maxX - maxX / 2;
+
+  const y =
+    Math.random() * maxY - maxY / 2;
+
+  button.style.transform =
+    `translate(${x}px, ${y}px)`;
+
+}
+
+
+/* HEARTS */
+
+function createHearts() {
+
+  for (let i = 0; i < 20; i++) {
+
+    const heart =
+      document.createElement("div");
+
+    heart.className =
+      "floating";
+
+    heart.textContent =
+      "❤️";
+
+    heart.style.left =
+      Math.random() * 100 + "vw";
+
+    heart.style.bottom =
+      "-30px";
+
+    heart.style.animationDelay =
+      Math.random() * 2 + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(function() {
+
+      heart.remove();
+
+    }, 6000);
+
   }
+
+}
+
 </script>
-  
 
 </body>
+
 </html>
