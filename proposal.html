@@ -1,1 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Special Proposal ❤️</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff0f5;
+      color: #333;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    h1 {
+      color: #e91e63;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      margin: 20px 0;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .photo {
+      max-width: 100%;
+      border-radius: 15px;
+      margin: 10px 0;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    button {
+      border: none;
+      padding: 14px 30px;
+      border-radius: 30px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .yes {
+      background: #e91e63;
+      color: white;
+    }
+
+    .no {
+      background: #ddd;
+      color: #333;
+    }
+
+    #success {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="card">
+      <h1>💌 A Special Message For You</h1>
+      <p id="message">
+        Your special proposal will appear here.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>❤️ Reasons</h2>
+      <p id="reasons">
+        Your reasons will appear here.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Will you be my girlfriend? 💕</h2>
+
+      <div class="buttons">
+        <button class="no" onclick="sayNo()">No</button>
+        <button class="yes" onclick="sayYes()">Yes ❤️</button>
+      </div>
+    </div>
+
+    <div class="card" id="success">
+      <h1>🎉 Congratulations! 🎉</h1>
+
+      <p id="finalMessage">
+        Your congratulations message will appear here.
+      </p>
+
+      <p>❤️ ❤️ ❤️</p>
+    </div>
+
+  </div>
+
+  <script>
+    function sayYes() {
+      document.getElementById("success").style.display = "block";
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+      });
+    }
+
+    function sayNo() {
+      alert("Are you sure? 🥺");
+    }
+  </script>
+
+</body>
+</html>
