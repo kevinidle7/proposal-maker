@@ -5,41 +5,134 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Proposal Maker ❤️</title>
 
-  <link rel="stylesheet" href="style.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff0f5;
+      color: #333;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #e91e63;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      margin: 20px 0;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 7px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 15px;
+      border: none;
+      border-radius: 30px;
+      background: #e91e63;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    #result {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      background: #fce4ec;
+      border-radius: 10px;
+      word-break: break-all;
+    }
+  </style>
 </head>
 
 <body>
 
-  <div class="app">
+  <div class="container">
 
-    <h1>💌 Make Your Proposal</h1>
-    <p class="subtitle">Alright, let's make this one special 👀❤️</p>
+    <h1>💌 Proposal Maker</h1>
 
-    <label>Your name</label>
-    <input id="yourName" type="text" placeholder="e.g. Kevin">
+    <div class="card">
 
-    <label>Who got you feeling like this? 👀</label>
-    <input id="theirName" type="text" placeholder="e.g. Hailey">
+      <label>Her Name</label>
+      <input id="name" type="text" placeholder="Enter her name">
 
-    <label>Say what's on your mind 💭</label>
-    <textarea id="message" placeholder="Write something from the heart..."></textarea>
+      <label>Your Message</label>
+      <textarea id="message" placeholder="Write your special message..."></textarea>
 
-    <label>Why are you so down bad for them? 😭❤️</label>
+      <label>Reasons You Love Her</label>
+      <textarea id="reasons" placeholder="Write your reasons..."></textarea>
 
-    <input class="reason" type="text" placeholder="I love you because... ❤️">
-    <input class="reason" type="text" placeholder="You always make me... 🥹">
-    <input class="reason" type="text" placeholder="I love the way you... 👀❤️">
+      <label>Congratulations Message</label>
+      <textarea id="final" placeholder="Write what she will see after Yes..."></textarea>
 
-    <label>Drop some memories 📸</label>
-    <input id="photos" type="file" accept="image/*" multiple>
+      <button onclick="generateLink()">✨ Generate Proposal Link</button>
 
-    <p class="photo-limit">📸 Pick up to 5 memories</p>
+      <div id="result">
+        <strong>Your proposal link:</strong>
+        <p id="link"></p>
+      </div>
 
-    <button id="create">LET'S MAKE IT HAPPEN ❤️</button>
+    </div>
 
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    function generateLink() {
+      const name = document.getElementById("name").value;
+      const message = document.getElementById("message").value;
+      const reasons = document.getElementById("reasons").value;
+      const final = document.getElementById("final").value;
+
+      const params = new URLSearchParams();
+
+      params.set("name", name);
+      params.set("message", message);
+      params.set("reasons", reasons);
+      params.set("final", final);
+
+      const link =
+        window.location.origin +
+        "/proposal-maker/proposal.html?" +
+        params.toString();
+
+      document.getElementById("link").textContent = link;
+      document.getElementById("result").style.display = "block";
+    }
+  </script>
 
 </body>
 </html>
