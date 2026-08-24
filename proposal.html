@@ -111,20 +111,32 @@
     </div>
 
   </div>
+<script>
+  const params = new URLSearchParams(window.location.search);
 
-  <script>
-    function sayYes() {
-      document.getElementById("success").style.display = "block";
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: "smooth"
-      });
-    }
+  document.getElementById("message").textContent =
+    params.get("message") || "Your special proposal will appear here.";
 
-    function sayNo() {
-      alert("Are you sure? 🥺");
-    }
-  </script>
+  document.getElementById("reasons").textContent =
+    params.get("reasons") || "Your reasons will appear here.";
+
+  document.getElementById("finalMessage").textContent =
+    params.get("final") || "Your congratulations message will appear here.";
+
+  function sayYes() {
+    document.getElementById("success").style.display = "block";
+
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth"
+    });
+  }
+
+  function sayNo() {
+    alert("Are you sure? 🥺");
+  }
+</script>
+  
 
 </body>
 </html>
