@@ -371,12 +371,14 @@
 
 <script type="module">
 
+
 /* =========================
    FIREBASE
 ========================= */
 
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
 
 import {
   getFirestore,
@@ -388,7 +390,8 @@ from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSyCyClGyrH2ZTFV-UagawzRaDqkmu1AZSXY",
+  apiKey:
+    "AIzaSyCyClGyrH2ZTFV-UagawzRaDqkmu1AZSXY",
 
   authDomain:
     "proposal-maker-2caa1.firebaseapp.com",
@@ -472,20 +475,11 @@ function previewPhoto(inputId, previewId) {
 }
 
 
-previewPhoto(
-  "photo1",
-  "preview1"
-);
+previewPhoto("photo1", "preview1");
 
-previewPhoto(
-  "photo2",
-  "preview2"
-);
+previewPhoto("photo2", "preview2");
 
-previewPhoto(
-  "photo3",
-  "preview3"
-);
+previewPhoto("photo3", "preview3");
 
 
 
@@ -493,13 +487,14 @@ previewPhoto(
    GENERATE LINK
 ========================= */
 
-async async function generateLink() {
+async function generateLink() {
 
   const creatorEmail =
     document
       .getElementById("creatorEmail")
       .value
       .trim();
+
 
   if (!creatorEmail) {
 
@@ -553,7 +548,9 @@ async async function generateLink() {
       .value
       .trim()
 
-  ].filter(reason => reason !== "");
+  ].filter(
+    reason => reason !== ""
+  );
 
 
   const finalMessage =
@@ -569,12 +566,25 @@ async async function generateLink() {
       await addDoc(
         collection(db, "proposals"),
         {
-          name: name,
-          creatorEmail: creatorEmail,
-          message: message,
-          reasons: reasons,
-          finalMessage: finalMessage,
-          createdAt: new Date().toISOString()
+
+          name:
+            name,
+
+          creatorEmail:
+            creatorEmail,
+
+          message:
+            message,
+
+          reasons:
+            reasons,
+
+          finalMessage:
+            finalMessage,
+
+          createdAt:
+            new Date().toISOString()
+
         }
       );
 
@@ -587,12 +597,14 @@ async async function generateLink() {
 
     document
       .getElementById("link")
-      .textContent = link;
+      .textContent =
+      link;
 
 
     document
       .getElementById("result")
-      .style.display = "block";
+      .style.display =
+      "block";
 
 
     window.scrollTo({
@@ -646,6 +658,7 @@ function copyLink() {
   navigator
     .clipboard
     .writeText(link)
+
     .then(function() {
 
       alert(
@@ -653,6 +666,7 @@ function copyLink() {
       );
 
     })
+
     .catch(function() {
 
       alert(
@@ -664,13 +678,18 @@ function copyLink() {
 }
 
 
-/* Make functions available to the HTML buttons */
+
+/* =========================
+   MAKE BUTTONS WORK
+========================= */
 
 window.generateLink =
   generateLink;
 
+
 window.copyLink =
   copyLink;
+
 
 </script>
 
