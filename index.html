@@ -493,9 +493,132 @@ previewPhoto(
    GENERATE LINK
 ========================= */
 
-async function generateLink() {
+async async function generateLink() {
 
-  alert("Firebase is connected! ❤️");
+  const creatorEmail =
+    document
+      .getElementById("creatorEmail")
+      .value
+      .trim();
+
+  if (!creatorEmail) {
+
+    alert(
+      "Please enter your email so you can know when she says YES ❤️"
+    );
+
+    return;
+
+  }
+
+
+  const name =
+    document
+      .getElementById("name")
+      .value
+      .trim();
+
+
+  const message =
+    document
+      .getElementById("message")
+      .value
+      .trim();
+
+
+  const reasons = [
+
+    document
+      .getElementById("reason1")
+      .value
+      .trim(),
+
+    document
+      .getElementById("reason2")
+      .value
+      .trim(),
+
+    document
+      .getElementById("reason3")
+      .value
+      .trim(),
+
+    document
+      .getElementById("reason4")
+      .value
+      .trim(),
+
+    document
+      .getElementById("reason5")
+      .value
+      .trim()
+
+  ].filter(reason => reason !== "");
+
+
+  const finalMessage =
+    document
+      .getElementById("final")
+      .value
+      .trim();
+
+
+  try {
+
+    const docRef =
+      await addDoc(
+        collection(db, "proposals"),
+        {
+          name: name,
+          creatorEmail: creatorEmail,
+          message: message,
+          reasons: reasons,
+          finalMessage: finalMessage,
+          createdAt: new Date().toISOString()
+        }
+      );
+
+
+    const link =
+      window.location.origin +
+      "/proposal-maker/proposal.html?id=" +
+      docRef.id;
+
+
+    document
+      .getElementById("link")
+      .textContent = link;
+
+
+    document
+      .getElementById("result")
+      .style.display = "block";
+
+
+    window.scrollTo({
+
+      top:
+        document.body.scrollHeight,
+
+      behavior:
+        "smooth"
+
+    });
+
+
+  } catch (error) {
+
+    console.error(
+      "Firebase error:",
+      error
+    );
+
+
+    alert(
+      "Something went wrong saving your proposal. Please try again."
+    );
+
+  }
 
 }
 
