@@ -593,9 +593,29 @@ function copyLink() {
 
 }
 
-</script>
+<script type="module">
 
 
 </body>
 
 </html>
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+  apiKey: "AIzaSyCyClGyrH2ZTFV-UagawzRaDqkmu1AZSXY",
+  authDomain: "proposal-maker-2caa1.firebaseapp.com",
+  projectId: "proposal-maker-2caa1",
+  storageBucket: "proposal-maker-2caa1.firebasestorage.app",
+  messagingSenderId: "391476539873",
+  appId: "1:391476539873:web:4e594e6ef7818ddaeda2a0"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
