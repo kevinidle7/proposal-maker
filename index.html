@@ -369,10 +369,57 @@
 </div>
 
 
-<script>
+<script type="module">
+
+/* =========================
+   FIREBASE
+========================= */
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
-/* PHOTO PREVIEW */
+const firebaseConfig = {
+
+  apiKey: "AIzaSyCyClGyrH2ZTFV-UagawzRaDqkmu1AZSXY",
+
+  authDomain:
+    "proposal-maker-2caa1.firebaseapp.com",
+
+  projectId:
+    "proposal-maker-2caa1",
+
+  storageBucket:
+    "proposal-maker-2caa1.firebasestorage.app",
+
+  messagingSenderId:
+    "391476539873",
+
+  appId:
+    "1:391476539873:web:4e594e6ef7818ddaeda2a0"
+
+};
+
+
+const app =
+  initializeApp(firebaseConfig);
+
+
+const db =
+  getFirestore(app);
+
+
+
+/* =========================
+   PHOTO PREVIEW
+========================= */
 
 function previewPhoto(inputId, previewId) {
 
@@ -393,7 +440,8 @@ function previewPhoto(inputId, previewId) {
 
       if (!file) {
 
-        preview.style.display = "none";
+        preview.style.display =
+          "none";
 
         return;
 
@@ -424,141 +472,40 @@ function previewPhoto(inputId, previewId) {
 }
 
 
-previewPhoto("photo1", "preview1");
+previewPhoto(
+  "photo1",
+  "preview1"
+);
 
-previewPhoto("photo2", "preview2");
+previewPhoto(
+  "photo2",
+  "preview2"
+);
 
-previewPhoto("photo3", "preview3");
-
-
-
-/* GENERATE LINK */
-
-function generateLink() {
-
-
-  const creatorEmail =
-    document
-      .getElementById("creatorEmail")
-      .value
-      .trim();
+previewPhoto(
+  "photo3",
+  "preview3"
+);
 
 
-  if (!creatorEmail) {
 
-    alert(
-      "Please enter your email so you can know when she says YES ❤️"
-    );
+/* =========================
+   GENERATE LINK
+========================= */
 
-    return;
+async function generateLink() {
 
-  }
-
-
-  const params =
-    new URLSearchParams();
-
-
-  params.set(
-    "name",
-    document
-      .getElementById("name")
-      .value
-  );
-
-
-  params.set(
-    "email",
-    creatorEmail
-  );
-
-
-  params.set(
-    "message",
-    document
-      .getElementById("message")
-      .value
-  );
-
-
-  const reasons = [
-
-    document
-      .getElementById("reason1")
-      .value,
-
-    document
-      .getElementById("reason2")
-      .value,
-
-    document
-      .getElementById("reason3")
-      .value,
-
-    document
-      .getElementById("reason4")
-      .value,
-
-    document
-      .getElementById("reason5")
-      .value
-
-  ].filter(
-
-    reason =>
-      reason.trim() !== ""
-
-  );
-
-
-  params.set(
-    "reasons",
-    reasons.join("||")
-  );
-
-
-  params.set(
-    "final",
-    document
-      .getElementById("final")
-      .value
-  );
-
-
-  const link =
-    window.location.origin +
-    "/proposal-maker/proposal.html?" +
-    params.toString();
-
-
-  document
-    .getElementById("link")
-    .textContent = link;
-
-
-  document
-    .getElementById("result")
-    .style.display = "block";
-
-
-  window.scrollTo({
-
-    top:
-      document.body.scrollHeight,
-
-    behavior:
-      "smooth"
-
-  });
+  alert("Firebase is connected! ❤️");
 
 }
 
 
 
-/* COPY LINK */
+/* =========================
+   COPY LINK
+========================= */
 
 function copyLink() {
-
 
   const link =
     document
@@ -593,29 +540,18 @@ function copyLink() {
 
 }
 
-<script type="module">
+
+/* Make functions available to the HTML buttons */
+
+window.generateLink =
+  generateLink;
+
+window.copyLink =
+  copyLink;
+
+</script>
 
 
 </body>
 
 </html>
-
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-
-import {
-  getFirestore,
-  collection,
-  addDoc
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
-
-  const firebaseConfig = {
-  apiKey: "AIzaSyCyClGyrH2ZTFV-UagawzRaDqkmu1AZSXY",
-  authDomain: "proposal-maker-2caa1.firebaseapp.com",
-  projectId: "proposal-maker-2caa1",
-  storageBucket: "proposal-maker-2caa1.firebasestorage.app",
-  messagingSenderId: "391476539873",
-  appId: "1:391476539873:web:4e594e6ef7818ddaeda2a0"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
