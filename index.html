@@ -13,7 +13,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #fff0f5, #ffe4ec);
+      background: linear-gradient(135deg, #fff0f5, #ffe1eb);
       color: #333;
     }
 
@@ -75,14 +75,26 @@
       resize: vertical;
     }
 
-    .reason {
-      margin-bottom: 10px;
+    .photo-box {
+      margin-top: 10px;
+      padding: 18px;
+      border: 2px dashed #f3c5d4;
+      border-radius: 15px;
+      text-align: center;
+    }
+
+    .photo-preview {
+      display: none;
+      width: 100%;
+      max-height: 250px;
+      object-fit: cover;
+      margin-top: 12px;
+      border-radius: 15px;
     }
 
     .photo-note {
       font-size: 13px;
       color: #777;
-      margin-top: 6px;
     }
 
     .generate {
@@ -96,11 +108,6 @@
       font-size: 19px;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 5px 15px rgba(233,30,99,0.25);
-    }
-
-    .generate:hover {
-      transform: scale(1.02);
     }
 
     #result {
@@ -135,8 +142,9 @@
 <div class="container">
 
   <h1>💌 Proposal Maker</h1>
+
   <p class="subtitle">
-    Create a cute little surprise for someone special ❤️
+    Create a cute surprise for someone special ❤️
   </p>
 
   <div class="card">
@@ -151,145 +159,48 @@
       placeholder="Write something from your heart..."></textarea>
 
     <label>Reason #1 ❤️</label>
-    <input class="reason" id="reason1"
+    <input id="reason1" type="text"
       placeholder="One thing you love about her">
 
     <label>Reason #2 ❤️</label>
-    <input class="reason" id="reason2"
+    <input id="reason2" type="text"
       placeholder="Another reason">
 
     <label>Reason #3 ❤️</label>
-    <input class="reason" id="reason3"
+    <input id="reason3" type="text"
       placeholder="Another reason">
 
+    <label>Reason #4 ❤️</label>
+    <input id="reason4" type="text"
+      placeholder="Another reason">
+
+    <label>Reason #5 ❤️</label>
+    <input id="reason5" type="text"
+      placeholder="Another reason">
 
   </div>
-
 
   <div class="card">
 
     <h2>📸 Step 2 — Add Your Photos</h2>
 
-    <label>Photo 1 📸</label>
-<input id="photo1" type="file" accept="image/*">
-
-<label>Photo 2 📸</label>
-<input id="photo2" type="file" accept="image/*">
-
-<label>Photo 3 📸</label>
-<input id="photo3" type="file" accept="image/*">
-
-    <p class="photo-note">
-      💡 Use a direct image URL ending in .jpg, .png, .jpeg, or .webp.
-    </p>
-
-  </div>
-
-
-  <div class="card">
-
-    <h2>🎉 Step 3 — The Yes Message</h2>
-
-    <label>Message after she presses YES ❤️</label>
-
-    <textarea id="final"
-      placeholder="Write your congratulations message..."></textarea>
-
-    <button class="generate" onclick="generateLink()">
-      💕 Generate My Proposal
-    </button>
-
-    <div id="result">
-
-      <h3>🎉 Your proposal is ready!</h3>
-
-      <p id="link"></p>
-
-      <button class="copy" onclick="copyLink()">
-        📋 Copy Proposal Link
-      </button>
-
+    <div class="photo-box">
+      <label>Photo 1</label>
+      <input id="photo1" type="file" accept="image/*">
+      <img id="preview1" class="photo-preview">
     </div>
 
-  </div>
+    <div class="photo-box">
+      <label>Photo 2</label>
+      <input id="photo2" type="file" accept="image/*">
+      <img id="preview2" class="photo-preview">
+    </div>
 
-</div>
+    <div class="photo-box">
+      <label>Photo 3</label>
+      <input id="photo3" type="file" accept="image/*">
+      <img id="preview3" class="photo-preview">
+    </div>
 
-
-<script>
-
-function generateLink() {
-
-  const params = new URLSearchParams();
-
-  params.set(
-    "name",
-    document.getElementById("name").value
-  );
-
-  params.set(
-    "message",
-    document.getElementById("message").value
-  );
-
-  const reasons = [
-    document.getElementById("reason1").value,
-    document.getElementById("reason2").value,
-    document.getElementById("reason3").value,
-    document.getElementById("reason4").value,
-    document.getElementById("reason5").value
-  ].filter(reason => reason.trim() !== "");
-
-  params.set("reasons", reasons.join("||"));
-
-  params.set(
-    "photo1",
-    document.getElementById("photo1").value
-  );
-
-  params.set(
-    "photo2",
-    document.getElementById("photo2").value
-  );
-
-  params.set(
-    "photo3",
-    document.getElementById("photo3").value
-  );
-
-  params.set(
-    "final",
-    document.getElementById("final").value
-  );
-
-  const link =
-    window.location.origin +
-    "/proposal-maker/proposal.html?" +
-    params.toString();
-
-  document.getElementById("link").textContent = link;
-
-  document.getElementById("result").style.display = "block";
-
-  window.scrollTo({
-    top: document.body.scrollHeight,
-    behavior: "smooth"
-  });
-}
-
-
-function copyLink() {
-
-  const link =
-    document.getElementById("link").textContent;
-
-  navigator.clipboard.writeText(link);
-
-  alert("Proposal link copied! 💕");
-
-}
-
-</script>
-
-</body>
-</html>
+    <p class="photo-note">
+      📱 Tap the box
