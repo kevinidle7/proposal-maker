@@ -28,24 +28,31 @@
       min-height: 100vh;
     }
 
-    .page {
-      min-height: 100vh;
-      display: none;
+    .container {
+      max-width: 700px;
+      margin: auto;
       padding: 25px 18px 60px;
+    }
+
+    /* =========================
+       PAGES
+    ========================= */
+
+    .page {
+      display: none;
     }
 
     .page.active {
       display: block;
     }
 
-    .container {
-      max-width: 700px;
-      margin: auto;
-    }
+    /* =========================
+       HERO
+    ========================= */
 
     .hero {
       text-align: center;
-      padding: 30px 10px;
+      padding: 25px 10px;
     }
 
     .heart {
@@ -70,11 +77,16 @@
       font-size: 32px;
     }
 
+    /* =========================
+       CARDS
+    ========================= */
+
     .card {
       background: white;
       padding: 25px;
       margin: 20px 0;
       border-radius: 22px;
+
       box-shadow:
         0 8px 25px rgba(0,0,0,0.08);
     }
@@ -89,6 +101,10 @@
       white-space: pre-line;
     }
 
+    /* =========================
+       REASONS
+    ========================= */
+
     .reason {
       background: #fff0f5;
       padding: 14px;
@@ -97,6 +113,10 @@
       text-align: left;
       font-size: 16px;
     }
+
+    /* =========================
+       PHOTOS
+    ========================= */
 
     .photos {
       display: flex;
@@ -112,135 +132,153 @@
       display: none;
     }
 
-    .continue-area {
-      text-align: center;
-      margin-top: 30px;
-    }
+    /* =========================
+       CONTINUE BUTTON
+    ========================= */
 
     .continue {
+      width: 100%;
       border: none;
-      padding: 16px 35px;
-      border-radius: 30px;
+      padding: 17px;
+      border-radius: 35px;
       background: #e91e63;
       color: white;
-      font-size: 19px;
+      font-size: 20px;
       font-weight: bold;
       cursor: pointer;
-      box-shadow:
-        0 8px 20px rgba(233,30,99,0.25);
+      margin-top: 15px;
     }
 
     .continue:hover {
-      transform: scale(1.05);
+      transform: scale(1.02);
     }
 
-
-    /* PAGE 2 */
+    /* =========================
+       QUESTION PAGE
+    ========================= */
 
     .question-page {
+      min-height: 85vh;
+
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
+      align-items: center;
+
       text-align: center;
     }
 
-    .question-container {
-      width: 100%;
-      max-width: 700px;
+    .question-page h1 {
+      font-size: 36px;
+      margin-bottom: 15px;
     }
 
-    .question-title {
-      font-size: 42px;
-      color: #e91e63;
-      margin-bottom: 50px;
+    .question-page p {
+      font-size: 20px;
+      margin-bottom: 45px;
     }
 
     .buttons {
-      position: relative;
-      min-height: 250px;
+      width: 100%;
+      min-height: 220px;
 
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
 
       gap: 30px;
+      position: relative;
     }
 
     button {
       border: none;
-      border-radius: 50px;
       cursor: pointer;
       font-weight: bold;
-      transition:
-        transform 0.3s ease,
-        font-size 0.3s ease,
-        padding 0.3s ease;
     }
+
+    /* =========================
+       YES BUTTON
+    ========================= */
 
     .yes {
       background: #e91e63;
       color: white;
 
-      font-size: 28px;
-      padding: 22px 55px;
+      padding: 22px 45px;
+      border-radius: 50px;
 
-      box-shadow:
-        0 10px 30px rgba(233,30,99,0.3);
+      font-size: 25px;
+
+      transition:
+        transform 0.25s ease,
+        font-size 0.25s ease;
     }
+
+    /* =========================
+       NO BUTTON
+    ========================= */
 
     .no {
       background: #ddd;
       color: #333;
 
-      font-size: 22px;
-      padding: 18px 40px;
+      padding: 15px 30px;
+      border-radius: 50px;
+
+      font-size: 18px;
+
+      transition:
+        transform 0.25s ease,
+        font-size 0.25s ease,
+        padding 0.25s ease;
     }
 
+    /* =========================
+       SUCCESS
+    ========================= */
 
-    /* SUCCESS */
-
-    #successPage {
+    #success {
+      display: none;
       text-align: center;
     }
 
-    .success-heart {
-      font-size: 80px;
-      animation: heartbeat 1s infinite;
-    }
-
-    .success-title {
-      font-size: 52px;
-      color: #e91e63;
+    #success .heart {
+      font-size: 75px;
     }
 
     #finalMessage {
-      font-size: 21px;
+      font-size: 20px;
       line-height: 1.7;
       white-space: pre-line;
-      background: white;
-      padding: 25px;
-      border-radius: 22px;
-      box-shadow:
-        0 8px 25px rgba(0,0,0,0.08);
     }
+
+    /* =========================
+       FLOATING HEARTS
+    ========================= */
 
     .floating {
       position: fixed;
       pointer-events: none;
-      animation: floatUp 5s linear forwards;
+
+      animation:
+        floatUp 5s linear forwards;
+
       font-size: 25px;
-      z-index: 999;
     }
 
     @keyframes floatUp {
 
       from {
-        transform: translateY(0);
+        transform:
+          translateY(0);
+
         opacity: 1;
       }
 
       to {
-        transform: translateY(-100vh);
+        transform:
+          translateY(-100vh);
+
         opacity: 0;
       }
 
@@ -253,17 +291,16 @@
 
 <body>
 
+<div class="container">
 
-<!-- =========================
-     PAGE 1
-========================= -->
 
-<section
-  id="page1"
-  class="page active">
+  <!-- =================================
+       PAGE 1
+  ================================== -->
 
-  <div class="container">
-
+  <div
+    id="page1"
+    class="page active">
 
     <div class="hero">
 
@@ -272,14 +309,16 @@
       </div>
 
       <h1>
-
         A Special Message For
-        <span id="name">You</span>
-
+        <span id="name">
+          You
+        </span>
       </h1>
 
     </div>
 
+
+    <!-- MESSAGE -->
 
     <div class="card">
 
@@ -288,26 +327,29 @@
       </h2>
 
       <p id="message">
-        Loading your special message... ❤️
+        Your special message will appear here.
       </p>
 
     </div>
 
 
-    <div class="card">
+    <!-- REASONS -->
+
+    <div
+      class="card"
+      id="reasonsCard">
 
       <h2>
         ❤️ Reasons
       </h2>
 
       <div id="reasons">
-        <p>
-          Loading reasons... ❤️
-        </p>
       </div>
 
     </div>
 
+
+    <!-- MEMORIES -->
 
     <div class="card">
 
@@ -331,135 +373,125 @@
 
       </div>
 
-    </div>
+      <p
+        id="noPhotos"
+        style="text-align:center;color:#888;">
 
+        Your memories will appear here ❤️
 
-    <div class="continue-area">
-
-      <button
-        class="continue"
-        onclick="showQuestion()">
-
-        Continue ❤️
-
-      </button>
+      </p>
 
     </div>
 
+
+    <!-- ONLY CONTINUE ON PAGE 1 -->
+
+    <button
+      class="continue"
+      onclick="goToPage2()">
+
+      Continue ❤️
+
+    </button>
 
   </div>
 
-</section>
 
 
+  <!-- =================================
+       PAGE 2
+  ================================== -->
 
-<!-- =========================
-     PAGE 2
-========================= -->
+  <div
+    id="page2"
+    class="page">
 
-<section
-  id="page2"
-  class="page question-page">
+    <div class="question-page">
 
-  <div class="question-container">
+      <div
+        class="heart"
+        style="font-size:70px;">
 
-
-    <div class="heart">
-      💕
-    </div>
-
-
-    <h1 class="question-title">
-
-      Will you be my girlfriend? 💕
-
-    </h1>
-
-
-    <div class="buttons">
-
-      <button
-        id="yesButton"
-        class="yes"
-        onclick="sayYes()">
-
-        YES ❤️
-
-      </button>
-
-
-      <button
-        id="noButton"
-        class="no"
-        onclick="sayNo()">
-
-        NO
-
-      </button>
-
-    </div>
-
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================
-     SUCCESS PAGE
-========================= -->
-
-<section
-  id="successPage"
-  class="page">
-
-  <div class="container">
-
-
-    <div class="hero">
-
-      <div class="success-heart">
-        💖
+        💕
       </div>
 
-
-      <h1 class="success-title">
-
-        YAY!!! 🎉
-
+      <h1>
+        Will you be my girlfriend?
       </h1>
 
-
-      <p
-        id="finalMessage">
-
-        Congratulations!
-
+      <p>
+        There's only one question left... ❤️
       </p>
 
 
-      <p style="font-size:30px;">
+      <!-- YES / NO EXIST ONLY HERE -->
 
-        ❤️ 💕 ❤️ 💕 ❤️
+      <div class="buttons">
 
-      </p>
+        <button
+          id="yesButton"
+          class="yes"
+          onclick="sayYes()">
+
+          YES ❤️
+
+        </button>
+
+
+        <button
+          id="noButton"
+          class="no"
+          onclick="sayNo()">
+
+          NO
+
+        </button>
+
+      </div>
 
     </div>
 
+  </div>
+
+
+
+  <!-- =================================
+       SUCCESS SCREEN
+  ================================== -->
+
+  <div
+    id="success"
+    class="card">
+
+    <div class="heart">
+      💖
+    </div>
+
+    <h1>
+      YAY!!! 🎉
+    </h1>
+
+    <p id="finalMessage">
+      Congratulations! ❤️
+    </p>
+
+    <p style="font-size:30px;">
+      ❤️ 💕 ❤️ 💕 ❤️
+    </p>
 
   </div>
 
-</section>
+
+</div>
 
 
 
 <script type="module">
 
 
-/* =========================
+/* =================================
    FIREBASE
-========================= */
+================================= */
 
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
@@ -499,39 +531,36 @@ const firebaseConfig = {
 const app =
   initializeApp(firebaseConfig);
 
-
 const db =
   getFirestore(app);
 
 
 
-/* =========================
+/* =================================
    GET PROPOSAL ID
-========================= */
+================================= */
 
 const params =
   new URLSearchParams(
     window.location.search
   );
 
-
 const proposalId =
   params.get("id");
 
 
 
-/* =========================
+/* =================================
    LOAD PROPOSAL
-========================= */
+================================= */
 
 async function loadProposal() {
 
   if (!proposalId) {
 
-    document
-      .getElementById("message")
-      .textContent =
-      "This proposal link is missing its ID. ❤️";
+    console.error(
+      "No proposal ID found."
+    );
 
     return;
 
@@ -549,17 +578,14 @@ async function loadProposal() {
 
 
     const proposalSnap =
-      await getDoc(
-        proposalRef
-      );
+      await getDoc(proposalRef);
 
 
     if (!proposalSnap.exists()) {
 
-      document
-        .getElementById("message")
-        .textContent =
-        "Sorry, this proposal could not be found. 💔";
+      alert(
+        "This proposal could not be found."
+      );
 
       return;
 
@@ -568,7 +594,6 @@ async function loadProposal() {
 
     const data =
       proposalSnap.data();
-
 
 
     /* NAME */
@@ -583,7 +608,6 @@ async function loadProposal() {
     }
 
 
-
     /* MESSAGE */
 
     if (data.message) {
@@ -596,7 +620,6 @@ async function loadProposal() {
     }
 
 
-
     /* REASONS */
 
     const reasonsContainer =
@@ -604,13 +627,8 @@ async function loadProposal() {
         .getElementById("reasons");
 
 
-    reasonsContainer.innerHTML =
-      "";
-
-
     if (
       data.reasons &&
-      Array.isArray(data.reasons) &&
       data.reasons.length > 0
     ) {
 
@@ -618,7 +636,9 @@ async function loadProposal() {
         function(reason) {
 
           const div =
-            document.createElement("div");
+            document.createElement(
+              "div"
+            );
 
           div.className =
             "reason";
@@ -632,13 +652,15 @@ async function loadProposal() {
         }
       );
 
-    } else {
+    }
+    else {
 
-      reasonsContainer.innerHTML =
-        "<p>❤️ There are some special reasons waiting for you.</p>";
+      document
+        .getElementById("reasonsCard")
+        .style.display =
+        "none";
 
     }
-
 
 
     /* FINAL MESSAGE */
@@ -652,94 +674,26 @@ async function loadProposal() {
 
     }
 
+  }
 
-
-    /* PHOTOS */
-
-    loadPhoto(
-      "photo1",
-      data.photo1
-    );
-
-    loadPhoto(
-      "photo2",
-      data.photo2
-    );
-
-    loadPhoto(
-      "photo3",
-      data.photo3
-    );
-
-
-  } catch (error) {
+  catch (error) {
 
     console.error(
       "Error loading proposal:",
       error
     );
 
-
-    document
-      .getElementById("message")
-      .textContent =
-      "Something went wrong loading this proposal. 💔";
-
   }
 
 }
 
 
-loadProposal();
 
+/* =================================
+   PAGE 1 → PAGE 2
+================================= */
 
-
-/* =========================
-   LOAD PHOTO
-========================= */
-
-function loadPhoto(
-  elementId,
-  url
-) {
-
-  if (!url) {
-
-    return;
-
-  }
-
-
-  const img =
-    document
-      .getElementById(elementId);
-
-
-  img.src =
-    url;
-
-
-  img.style.display =
-    "block";
-
-
-  img.onerror =
-    function() {
-
-      img.style.display =
-        "none";
-
-    };
-
-}
-
-
-
-/* =========================
-   CONTINUE
-========================= */
-
-window.showQuestion =
+window.goToPage2 =
 function() {
 
   document
@@ -766,11 +720,15 @@ function() {
 
 
 
-/* =========================
+/* =================================
    NO BUTTON
-========================= */
+================================= */
 
 let noClicks = 0;
+
+let yesScale = 1;
+
+let noScale = 1;
 
 
 window.sayNo =
@@ -779,9 +737,25 @@ function() {
   noClicks++;
 
 
-  const noButton =
-    document
-      .getElementById("noButton");
+  /*
+    YES gets bigger
+  */
+
+  yesScale += 0.18;
+
+
+  /*
+    NO gets smaller
+  */
+
+  noScale -= 0.12;
+
+
+  if (noScale < 0.25) {
+
+    noScale = 0.25;
+
+  }
 
 
   const yesButton =
@@ -789,101 +763,52 @@ function() {
       .getElementById("yesButton");
 
 
-
-  /* NO GETS SMALLER */
-
-  const noScale =
-    Math.max(
-      1 - noClicks * 0.12,
-      0.15
-    );
-
-
-  noButton.style.transform =
-    `scale(${noScale})`;
-
-
-
-  /* YES GETS BIGGER */
-
-  const yesScale =
-    Math.min(
-      1 + noClicks * 0.12,
-      2.5
-    );
+  const noButton =
+    document
+      .getElementById("noButton");
 
 
   yesButton.style.transform =
     `scale(${yesScale})`;
 
 
-
-  /* MOVE NO */
-
-  const x =
-    Math.random() * 220 - 110;
+  noButton.style.transform =
+    `scale(${noScale})`;
 
 
-  const y =
-    Math.random() * 140 - 70;
+  /*
+    After many NO taps,
+    make YES extra obvious.
+  */
 
+  if (noClicks >= 6) {
 
-  noButton.style.marginLeft =
-    x + "px";
-
-
-  noButton.style.marginTop =
-    y + "px";
-
-
-
-  /* CHANGE TEXT */
-
-  if (noClicks === 3) {
-
-    noButton.textContent =
-      "Are you sure? 🥺";
+    yesButton.textContent =
+      "YES ❤️ PLEASE";
 
   }
-
-
-  if (noClicks === 6) {
-
-    noButton.textContent =
-      "Really? 😭";
-
-  }
-
-
-  if (noClicks === 9) {
-
-    noButton.textContent =
-      "No 😭";
-
-  }
-
 
 };
 
 
 
-/* =========================
-   YES
-========================= */
+/* =================================
+   YES BUTTON
+================================= */
 
 window.sayYes =
 function() {
 
   document
     .getElementById("page2")
-    .classList
-    .remove("active");
+    .style.display =
+    "none";
 
 
   document
-    .getElementById("successPage")
-    .classList
-    .add("active");
+    .getElementById("success")
+    .style.display =
+    "block";
 
 
   createHearts();
@@ -901,20 +826,22 @@ function() {
 
 
 
-/* =========================
-   HEARTS
-========================= */
+/* =================================
+   FLOATING HEARTS
+================================= */
 
 function createHearts() {
 
   for (
     let i = 0;
-    i < 35;
+    i < 30;
     i++
   ) {
 
     const heart =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
 
     heart.className =
@@ -956,6 +883,13 @@ function createHearts() {
 
 }
 
+
+
+/* =================================
+   START
+================================= */
+
+loadProposal();
 
 </script>
 
