@@ -25,17 +25,27 @@
         #ffe1eb
       );
       color: #333;
+      min-height: 100vh;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: none;
+      padding: 25px 18px 60px;
+    }
+
+    .page.active {
+      display: block;
     }
 
     .container {
       max-width: 700px;
       margin: auto;
-      padding: 25px 18px 60px;
     }
 
     .hero {
       text-align: center;
-      padding: 25px 10px;
+      padding: 30px 10px;
     }
 
     .heart {
@@ -44,6 +54,7 @@
     }
 
     @keyframes heartbeat {
+
       0%, 100% {
         transform: scale(1);
       }
@@ -51,6 +62,7 @@
       50% {
         transform: scale(1.15);
       }
+
     }
 
     h1 {
@@ -100,65 +112,128 @@
       display: none;
     }
 
-    .question {
+    .continue-area {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .continue {
+      border: none;
+      padding: 16px 35px;
+      border-radius: 30px;
+      background: #e91e63;
+      color: white;
+      font-size: 19px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow:
+        0 8px 20px rgba(233,30,99,0.25);
+    }
+
+    .continue:hover {
+      transform: scale(1.05);
+    }
+
+
+    /* PAGE 2 */
+
+    .question-page {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
     }
 
-    .question h2 {
+    .question-container {
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .question-title {
+      font-size: 42px;
       color: #e91e63;
+      margin-bottom: 50px;
     }
 
     .buttons {
+      position: relative;
+      min-height: 250px;
+
       display: flex;
-      justify-content: center;
       align-items: center;
-      gap: 15px;
-      margin-top: 25px;
-      min-height: 60px;
+      justify-content: center;
+
+      gap: 30px;
     }
 
     button {
       border: none;
-      padding: 13px 24px;
-      border-radius: 30px;
-      font-size: 17px;
+      border-radius: 50px;
       cursor: pointer;
-      transition: 0.25s;
+      font-weight: bold;
+      transition:
+        transform 0.3s ease,
+        font-size 0.3s ease,
+        padding 0.3s ease;
     }
 
     .yes {
       background: #e91e63;
       color: white;
-    }
 
-    .yes:hover {
-      transform: scale(1.05);
+      font-size: 28px;
+      padding: 22px 55px;
+
+      box-shadow:
+        0 10px 30px rgba(233,30,99,0.3);
     }
 
     .no {
       background: #ddd;
       color: #333;
+
+      font-size: 22px;
+      padding: 18px 40px;
     }
 
-    #success {
-      display: none;
+
+    /* SUCCESS */
+
+    #successPage {
       text-align: center;
     }
 
+    .success-heart {
+      font-size: 80px;
+      animation: heartbeat 1s infinite;
+    }
+
+    .success-title {
+      font-size: 52px;
+      color: #e91e63;
+    }
+
     #finalMessage {
-      font-size: 19px;
-      line-height: 1.6;
+      font-size: 21px;
+      line-height: 1.7;
       white-space: pre-line;
+      background: white;
+      padding: 25px;
+      border-radius: 22px;
+      box-shadow:
+        0 8px 25px rgba(0,0,0,0.08);
     }
 
     .floating {
       position: fixed;
       pointer-events: none;
       animation: floatUp 5s linear forwards;
-      font-size: 20px;
+      font-size: 25px;
+      z-index: 999;
     }
 
     @keyframes floatUp {
+
       from {
         transform: translateY(0);
         opacity: 1;
@@ -168,6 +243,7 @@
         transform: translateY(-100vh);
         opacity: 0;
       }
+
     }
 
   </style>
@@ -177,112 +253,205 @@
 
 <body>
 
-<div class="container">
+
+<!-- =========================
+     PAGE 1
+========================= -->
+
+<section
+  id="page1"
+  class="page active">
+
+  <div class="container">
 
 
-  <div class="hero">
+    <div class="hero">
 
-    <div class="heart">❤️</div>
+      <div class="heart">
+        ❤️
+      </div>
 
-    <h1>
-      A Special Message For
-      <span id="name">You</span>
+      <h1>
+
+        A Special Message For
+        <span id="name">You</span>
+
+      </h1>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>
+        💌 Something I Want To Tell You
+      </h2>
+
+      <p id="message">
+        Loading your special message... ❤️
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>
+        ❤️ Reasons
+      </h2>
+
+      <div id="reasons">
+        <p>
+          Loading reasons... ❤️
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>
+        📸 Memories
+      </h2>
+
+      <div class="photos">
+
+        <img
+          id="photo1"
+          class="photo">
+
+        <img
+          id="photo2"
+          class="photo">
+
+        <img
+          id="photo3"
+          class="photo">
+
+      </div>
+
+    </div>
+
+
+    <div class="continue-area">
+
+      <button
+        class="continue"
+        onclick="showQuestion()">
+
+        Continue ❤️
+
+      </button>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     PAGE 2
+========================= -->
+
+<section
+  id="page2"
+  class="page question-page">
+
+  <div class="question-container">
+
+
+    <div class="heart">
+      💕
+    </div>
+
+
+    <h1 class="question-title">
+
+      Will you be my girlfriend? 💕
+
     </h1>
 
-  </div>
-
-
-  <div class="card">
-
-    <h2>💌 Something I Want To Tell You</h2>
-
-    <p id="message">
-      Loading your special message... ❤️
-    </p>
-
-  </div>
-
-
-  <div class="card">
-
-    <h2>❤️ Reasons</h2>
-
-    <div id="reasons">
-      <p>Loading reasons... ❤️</p>
-    </div>
-
-  </div>
-
-
-  <div class="card">
-
-    <h2>📸 Memories</h2>
-
-    <div class="photos">
-
-      <img id="photo1" class="photo">
-
-      <img id="photo2" class="photo">
-
-      <img id="photo3" class="photo">
-
-    </div>
-
-  </div>
-
-
-  <div class="card question">
-
-    <h2>
-      Will you be my girlfriend? 💕
-    </h2>
 
     <div class="buttons">
 
       <button
+        id="yesButton"
         class="yes"
         onclick="sayYes()">
 
-        Yes ❤️
+        YES ❤️
 
       </button>
+
 
       <button
-        class="no"
         id="noButton"
+        class="no"
         onclick="sayNo()">
 
-        No
+        NO
 
       </button>
 
     </div>
 
+
   </div>
 
+</section>
 
-  <div class="card" id="success">
 
-    <div class="heart">
-      💖
+
+<!-- =========================
+     SUCCESS PAGE
+========================= -->
+
+<section
+  id="successPage"
+  class="page">
+
+  <div class="container">
+
+
+    <div class="hero">
+
+      <div class="success-heart">
+        💖
+      </div>
+
+
+      <h1 class="success-title">
+
+        YAY!!! 🎉
+
+      </h1>
+
+
+      <p
+        id="finalMessage">
+
+        Congratulations!
+
+      </p>
+
+
+      <p style="font-size:30px;">
+
+        ❤️ 💕 ❤️ 💕 ❤️
+
+      </p>
+
     </div>
 
-    <h1>
-      YAY!!! 🎉
-    </h1>
-
-    <p id="finalMessage">
-      Congratulations!
-    </p>
-
-    <p>
-      ❤️ 💕 ❤️ 💕 ❤️
-    </p>
 
   </div>
 
+</section>
 
-</div>
 
 
 <script type="module">
@@ -350,6 +519,7 @@ const proposalId =
   params.get("id");
 
 
+
 /* =========================
    LOAD PROPOSAL
 ========================= */
@@ -358,7 +528,8 @@ async function loadProposal() {
 
   if (!proposalId) {
 
-    document.getElementById("message")
+    document
+      .getElementById("message")
       .textContent =
       "This proposal link is missing its ID. ❤️";
 
@@ -378,12 +549,15 @@ async function loadProposal() {
 
 
     const proposalSnap =
-      await getDoc(proposalRef);
+      await getDoc(
+        proposalRef
+      );
 
 
     if (!proposalSnap.exists()) {
 
-      document.getElementById("message")
+      document
+        .getElementById("message")
         .textContent =
         "Sorry, this proposal could not be found. 💔";
 
@@ -430,12 +604,14 @@ async function loadProposal() {
         .getElementById("reasons");
 
 
-    reasonsContainer.innerHTML = "";
+    reasonsContainer.innerHTML =
+      "";
 
 
     if (
       data.reasons &&
-      Array.isArray(data.reasons)
+      Array.isArray(data.reasons) &&
+      data.reasons.length > 0
     ) {
 
       data.reasons.forEach(
@@ -456,6 +632,11 @@ async function loadProposal() {
         }
       );
 
+    } else {
+
+      reasonsContainer.innerHTML =
+        "<p>❤️ There are some special reasons waiting for you.</p>";
+
     }
 
 
@@ -470,6 +651,25 @@ async function loadProposal() {
         data.finalMessage;
 
     }
+
+
+
+    /* PHOTOS */
+
+    loadPhoto(
+      "photo1",
+      data.photo1
+    );
+
+    loadPhoto(
+      "photo2",
+      data.photo2
+    );
+
+    loadPhoto(
+      "photo3",
+      data.photo3
+    );
 
 
   } catch (error) {
@@ -495,28 +695,70 @@ loadProposal();
 
 
 /* =========================
-   YES
+   LOAD PHOTO
 ========================= */
 
-window.sayYes =
-function() {
+function loadPhoto(
+  elementId,
+  url
+) {
 
-  document
-    .getElementById("success")
-    .style.display =
+  if (!url) {
+
+    return;
+
+  }
+
+
+  const img =
+    document
+      .getElementById(elementId);
+
+
+  img.src =
+    url;
+
+
+  img.style.display =
     "block";
 
 
-  createHearts();
+  img.onerror =
+    function() {
+
+      img.style.display =
+        "none";
+
+    };
+
+}
+
+
+
+/* =========================
+   CONTINUE
+========================= */
+
+window.showQuestion =
+function() {
+
+  document
+    .getElementById("page1")
+    .classList
+    .remove("active");
+
+
+  document
+    .getElementById("page2")
+    .classList
+    .add("active");
 
 
   window.scrollTo({
 
-    top:
-      document.body.scrollHeight,
+    top: 0,
 
-    behavior:
-      "smooth"
+    behavior: "smooth"
 
   });
 
@@ -534,63 +776,126 @@ let noClicks = 0;
 window.sayNo =
 function() {
 
-  const button =
-    document.getElementById("noButton");
-
-
   noClicks++;
 
 
-  const maxX =
-    Math.min(
-      150 + noClicks * 10,
-      220
+  const noButton =
+    document
+      .getElementById("noButton");
+
+
+  const yesButton =
+    document
+      .getElementById("yesButton");
+
+
+
+  /* NO GETS SMALLER */
+
+  const noScale =
+    Math.max(
+      1 - noClicks * 0.12,
+      0.15
     );
 
 
-  const maxY =
+  noButton.style.transform =
+    `scale(${noScale})`;
+
+
+
+  /* YES GETS BIGGER */
+
+  const yesScale =
     Math.min(
-      60 + noClicks * 5,
-      100
+      1 + noClicks * 0.12,
+      2.5
     );
 
+
+  yesButton.style.transform =
+    `scale(${yesScale})`;
+
+
+
+  /* MOVE NO */
 
   const x =
-    Math.random() * maxX -
-    maxX / 2;
+    Math.random() * 220 - 110;
 
 
   const y =
-    Math.random() * maxY -
-    maxY / 2;
+    Math.random() * 140 - 70;
 
 
-  const scale =
-    Math.max(
-      1 - noClicks * 0.12,
-      0.35
-    );
+  noButton.style.marginLeft =
+    x + "px";
 
 
-  button.style.transform =
-    `translate(${x}px, ${y}px) scale(${scale})`;
+  noButton.style.marginTop =
+    y + "px";
 
 
-  if (noClicks >= 6) {
 
-    button.textContent =
-      "No? 🥺";
+  /* CHANGE TEXT */
 
+  if (noClicks === 3) {
+
+    noButton.textContent =
+      "Are you sure? 🥺";
 
   }
 
 
-  if (noClicks >= 9) {
+  if (noClicks === 6) {
 
-    button.textContent =
-      "Okay... 😭";
+    noButton.textContent =
+      "Really? 😭";
 
   }
+
+
+  if (noClicks === 9) {
+
+    noButton.textContent =
+      "No 😭";
+
+  }
+
+
+};
+
+
+
+/* =========================
+   YES
+========================= */
+
+window.sayYes =
+function() {
+
+  document
+    .getElementById("page2")
+    .classList
+    .remove("active");
+
+
+  document
+    .getElementById("successPage")
+    .classList
+    .add("active");
+
+
+  createHearts();
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
 
 };
 
@@ -604,7 +909,7 @@ function createHearts() {
 
   for (
     let i = 0;
-    i < 20;
+    i < 35;
     i++
   ) {
 
