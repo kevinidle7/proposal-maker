@@ -3,11 +3,13 @@
 
 <head>
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Proposal Maker 💌</title>
 
   <style>
+
     @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Pacifico&display=swap');
 
     * {
@@ -73,14 +75,14 @@
       outline: none;
     }
 
-    input:focus,
-    textarea:focus {
-      border-color: #e91e63;
-    }
-
     textarea {
       min-height: 110px;
       resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #e91e63;
     }
 
     .photo-box {
@@ -115,10 +117,14 @@
       border-radius: 30px;
       background: #e91e63;
       color: white;
-      font-family: 'DM Sans', sans-serif;
       font-size: 19px;
       font-weight: 700;
       cursor: pointer;
+    }
+
+    .generate:disabled {
+      opacity: 0.6;
+      cursor: wait;
     }
 
     #result {
@@ -153,8 +159,11 @@
       color: #e91e63;
       font-weight: 600;
     }
+
   </style>
+
 </head>
+
 
 <body>
 
@@ -166,6 +175,7 @@
     Create a cute surprise for someone special ❤️
   </p>
 
+
   <!-- STEP 1 -->
 
   <div class="card">
@@ -173,38 +183,56 @@
     <h2>✨ Step 1 — Make It Personal</h2>
 
     <label>Her Name 💕</label>
-    <input id="name" type="text" placeholder="e.g. Sarah">
+
+    <input
+      id="name"
+      type="text"
+      placeholder="e.g. Sarah">
+
 
     <label>Your Email 📩</label>
-    <input id="creatorEmail" type="email" placeholder="your@email.com">
+
+    <input
+      id="creatorEmail"
+      type="email"
+      placeholder="your@email.com">
+
 
     <label>Your Special Message 💌</label>
+
     <textarea
       id="message"
       placeholder="Write something from your heart..."></textarea>
 
-    <label>Reason #1 ❤️ <small>(optional)</small></label>
+
+    <label>Reason #1 ❤️</label>
     <input id="reason1" type="text" placeholder="One thing you love about her">
 
-    <label>Reason #2 ❤️ <small>(optional)</small></label>
+
+    <label>Reason #2 ❤️</label>
     <input id="reason2" type="text" placeholder="Another reason">
 
-    <label>Reason #3 ❤️ <small>(optional)</small></label>
+
+    <label>Reason #3 ❤️</label>
     <input id="reason3" type="text" placeholder="Another reason">
 
-    <label>Reason #4 ❤️ <small>(optional)</small></label>
+
+    <label>Reason #4 ❤️</label>
     <input id="reason4" type="text" placeholder="Another reason">
 
-    <label>Reason #5 ❤️ <small>(optional)</small></label>
+
+    <label>Reason #5 ❤️</label>
     <input id="reason5" type="text" placeholder="Another reason">
 
   </div>
 
-  <!-- PHOTOS -->
+
+  <!-- STEP 2 -->
 
   <div class="card">
 
     <h2>📸 Step 2 — Add Your Photos</h2>
+
 
     <div class="photo-box">
 
@@ -221,6 +249,7 @@
 
     </div>
 
+
     <div class="photo-box">
 
       <label>Photo 2</label>
@@ -235,6 +264,7 @@
         class="photo-preview">
 
     </div>
+
 
     <div class="photo-box">
 
@@ -251,13 +281,15 @@
 
     </div>
 
+
     <p class="photo-note">
-      📱 Choose up to 3 photos from your gallery.
+      📱 Photos are automatically compressed before saving.
     </p>
 
   </div>
 
-  <!-- FINAL MESSAGE -->
+
+  <!-- STEP 3 -->
 
   <div class="card">
 
@@ -271,13 +303,16 @@
       id="final"
       placeholder="Write your congratulations message..."></textarea>
 
+
     <button
+      id="generateButton"
       class="generate"
       onclick="generateLink()">
 
-      💕 Continue to Proposal
+      💕 Generate My Proposal
 
     </button>
+
 
     <div id="result">
 
@@ -304,11 +339,12 @@
 </div>
 
 
+
 <script type="module">
 
-/* =========================
+/* =================================
    FIREBASE
-========================= */
+================================= */
 
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
@@ -324,7 +360,7 @@ from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 const firebaseConfig = {
 
   apiKey:
-    "AIzaSyCyClGyrH2ZTFV-UagawzRaDqmu1AZSXY",
+    "AIzaSyCyClGyrH2ZTFV-UagawzRaDqkmu1AZSXY",
 
   authDomain:
     "proposal-maker-2caa1.firebaseapp.com",
@@ -351,9 +387,10 @@ const db =
   getFirestore(app);
 
 
-/* =========================
+
+/* =================================
    PHOTO PREVIEW
-========================= */
+================================= */
 
 function previewPhoto(inputId, previewId) {
 
@@ -363,6 +400,7 @@ function previewPhoto(inputId, previewId) {
   const preview =
     document.getElementById(previewId);
 
+
   input.addEventListener(
     "change",
     function() {
@@ -370,15 +408,20 @@ function previewPhoto(inputId, previewId) {
       const file =
         this.files[0];
 
+
       if (!file) {
 
-        preview.style.display = "none";
+        preview.style.display =
+          "none";
 
         return;
+
       }
+
 
       const reader =
         new FileReader();
+
 
       reader.onload =
         function(event) {
@@ -390,6 +433,7 @@ function previewPhoto(inputId, previewId) {
             "block";
 
         };
+
 
       reader.readAsDataURL(file);
 
@@ -404,9 +448,153 @@ previewPhoto("photo2", "preview2");
 previewPhoto("photo3", "preview3");
 
 
-/* =========================
-   GENERATE PROPOSAL
-========================= */
+
+/* =================================
+   COMPRESS PHOTO
+================================= */
+
+function compressPhoto(file) {
+
+  if (!file) {
+    return Promise.resolve(null);
+  }
+
+
+  return new Promise(
+    function(resolve, reject) {
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        function(event) {
+
+          const img =
+            new Image();
+
+
+          img.onload =
+            function() {
+
+              const maxSize = 700;
+
+              let width =
+                img.width;
+
+              let height =
+                img.height;
+
+
+              if (
+                width > maxSize ||
+                height > maxSize
+              ) {
+
+                if (width > height) {
+
+                  height =
+                    height *
+                    (maxSize / width);
+
+                  width =
+                    maxSize;
+
+                }
+                else {
+
+                  width =
+                    width *
+                    (maxSize / height);
+
+                  height =
+                    maxSize;
+
+                }
+
+              }
+
+
+              const canvas =
+                document.createElement(
+                  "canvas"
+                );
+
+
+              canvas.width =
+                width;
+
+              canvas.height =
+                height;
+
+
+              const ctx =
+                canvas.getContext("2d");
+
+
+              ctx.drawImage(
+                img,
+                0,
+                0,
+                width,
+                height
+              );
+
+
+              const compressed =
+                canvas.toDataURL(
+                  "image/jpeg",
+                  0.55
+                );
+
+
+              resolve(compressed);
+
+            };
+
+
+          img.onerror =
+            function() {
+
+              reject(
+                new Error(
+                  "Could not process image."
+                )
+              );
+
+            };
+
+
+          img.src =
+            event.target.result;
+
+        };
+
+
+      reader.onerror =
+        function() {
+
+          reject(
+            new Error(
+              "Could not read image."
+            )
+          );
+
+        };
+
+
+      reader.readAsDataURL(file);
+
+    }
+  );
+
+}
+
+
+
+/* =================================
+   GENERATE LINK
+================================= */
 
 async function generateLink() {
 
@@ -416,6 +604,7 @@ async function generateLink() {
       .value
       .trim();
 
+
   if (!creatorEmail) {
 
     alert(
@@ -423,56 +612,138 @@ async function generateLink() {
     );
 
     return;
+
   }
 
 
-  const name =
-    document
-      .getElementById("name")
-      .value
-      .trim();
-
-  const message =
-    document
-      .getElementById("message")
-      .value
-      .trim();
+  const generateButton =
+    document.getElementById(
+      "generateButton"
+    );
 
 
-  const reasons = [
+  generateButton.disabled =
+    true;
 
-    document.getElementById("reason1").value.trim(),
-    document.getElementById("reason2").value.trim(),
-    document.getElementById("reason3").value.trim(),
-    document.getElementById("reason4").value.trim(),
-    document.getElementById("reason5").value.trim()
-
-  ].filter(reason => reason !== "");
-
-
-  const finalMessage =
-    document
-      .getElementById("final")
-      .value
-      .trim();
+  generateButton.textContent =
+    "⏳ Creating your proposal...";
 
 
   try {
+
+    const name =
+      document
+        .getElementById("name")
+        .value
+        .trim();
+
+
+    const message =
+      document
+        .getElementById("message")
+        .value
+        .trim();
+
+
+    const reasons = [
+
+      document
+        .getElementById("reason1")
+        .value
+        .trim(),
+
+      document
+        .getElementById("reason2")
+        .value
+        .trim(),
+
+      document
+        .getElementById("reason3")
+        .value
+        .trim(),
+
+      document
+        .getElementById("reason4")
+        .value
+        .trim(),
+
+      document
+        .getElementById("reason5")
+        .value
+        .trim()
+
+    ].filter(
+      reason => reason !== ""
+    );
+
+
+    const finalMessage =
+      document
+        .getElementById("final")
+        .value
+        .trim();
+
+
+    /* GET PHOTO FILES */
+
+    const photo1File =
+      document
+        .getElementById("photo1")
+        .files[0];
+
+    const photo2File =
+      document
+        .getElementById("photo2")
+        .files[0];
+
+    const photo3File =
+      document
+        .getElementById("photo3")
+        .files[0];
+
+
+    /* COMPRESS PHOTOS */
+
+    const photo1 =
+      await compressPhoto(photo1File);
+
+    const photo2 =
+      await compressPhoto(photo2File);
+
+    const photo3 =
+      await compressPhoto(photo3File);
+
+
+    /* SAVE EVERYTHING */
 
     const docRef =
       await addDoc(
         collection(db, "proposals"),
         {
 
-          name: name,
+          name:
+            name,
 
-          creatorEmail: creatorEmail,
+          creatorEmail:
+            creatorEmail,
 
-          message: message,
+          message:
+            message,
 
-          reasons: reasons,
+          reasons:
+            reasons,
 
-          finalMessage: finalMessage,
+          finalMessage:
+            finalMessage,
+
+          photo1:
+            photo1,
+
+          photo2:
+            photo2,
+
+          photo3:
+            photo3,
 
           createdAt:
             new Date().toISOString()
@@ -480,6 +751,8 @@ async function generateLink() {
         }
       );
 
+
+    /* CREATE LINK */
 
     const link =
       window.location.origin +
@@ -489,12 +762,14 @@ async function generateLink() {
 
     document
       .getElementById("link")
-      .textContent = link;
+      .textContent =
+      link;
 
 
     document
       .getElementById("result")
-      .style.display = "block";
+      .style.display =
+      "block";
 
 
     window.scrollTo({
@@ -507,7 +782,15 @@ async function generateLink() {
 
     });
 
+
+    generateButton.disabled =
+      false;
+
+    generateButton.textContent =
+      "💕 Generate My Proposal";
+
   }
+
 
   catch (error) {
 
@@ -516,18 +799,27 @@ async function generateLink() {
       error
     );
 
+
     alert(
-      "Something went wrong saving your proposal. Please try again."
+      "Something went wrong. Please try again."
     );
+
+
+    generateButton.disabled =
+      false;
+
+    generateButton.textContent =
+      "💕 Generate My Proposal";
 
   }
 
 }
 
 
-/* =========================
+
+/* =================================
    COPY LINK
-========================= */
+================================= */
 
 function copyLink() {
 
@@ -536,27 +828,32 @@ function copyLink() {
       .getElementById("link")
       .textContent;
 
-  if (!link) return;
+
+  if (!link) {
+    return;
+  }
 
 
   navigator.clipboard
     .writeText(link)
+    .then(
+      function() {
 
-    .then(function() {
+        alert(
+          "Proposal link copied! 💕"
+        );
 
-      alert(
-        "Proposal link copied! 💕"
-      );
+      }
+    )
+    .catch(
+      function() {
 
-    })
+        alert(
+          "Please copy the link manually."
+        );
 
-    .catch(function() {
-
-      alert(
-        "Please copy the link manually."
-      );
-
-    });
+      }
+    );
 
 }
 
@@ -570,4 +867,5 @@ window.copyLink =
 </script>
 
 </body>
+
 </html>
