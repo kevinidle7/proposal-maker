@@ -123,7 +123,7 @@
       border-radius: 30px;
       font-size: 17px;
       cursor: pointer;
-      transition: 0.2s;
+      transition: 0.25s;
     }
 
     .yes {
@@ -197,7 +197,7 @@
     <h2>💌 Something I Want To Tell You</h2>
 
     <p id="message">
-      Your special message will appear here.
+      Loading your special message... ❤️
     </p>
 
   </div>
@@ -208,6 +208,7 @@
     <h2>❤️ Reasons</h2>
 
     <div id="reasons">
+      <p>Loading reasons... ❤️</p>
     </div>
 
   </div>
@@ -241,14 +242,18 @@
       <button
         class="yes"
         onclick="sayYes()">
+
         Yes ❤️
+
       </button>
 
       <button
         class="no"
         id="noButton"
         onclick="sayNo()">
+
         No
+
       </button>
 
     </div>
@@ -280,7 +285,60 @@
 </div>
 
 
-<script>
+<script type="module">
+
+
+/* =========================
+   FIREBASE
+========================= */
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
+import {
+  getFirestore,
+  doc,
+  getDoc
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyCyClGyrH2ZTFV-UagawzRaDqkmu1AZSXY",
+
+  authDomain:
+    "proposal-maker-2caa1.firebaseapp.com",
+
+  projectId:
+    "proposal-maker-2caa1",
+
+  storageBucket:
+    "proposal-maker-2caa1.firebasestorage.app",
+
+  messagingSenderId:
+    "391476539873",
+
+  appId:
+    "1:391476539873:web:4e594e6ef7818ddaeda2a0"
+
+};
+
+
+const app =
+  initializeApp(firebaseConfig);
+
+
+const db =
+  getFirestore(app);
+
+
+
+/* =========================
+   GET PROPOSAL ID
+========================= */
 
 const params =
   new URLSearchParams(
@@ -288,186 +346,311 @@ const params =
   );
 
 
-const name =
-  params.get("name");
-
-const message =
-  params.get("message");
-
-const reasons =
-  params.get("reasons");
-
-const finalMessage =
-  params.get("final");
+const proposalId =
+  params.get("id");
 
 
-/* NAME */
+/* =========================
+   LOAD PROPOSAL
+========================= */
 
-if (name) {
+async function loadProposal() {
 
-  document.getElementById("name")
-    .textContent = name;
+  if (!proposalId) {
 
-}
+    document.getElementById("message")
+      .textContent =
+      "This proposal link is missing its ID. ❤️";
 
+    return;
 
-/* MESSAGE */
-
-if (message) {
-
-  document.getElementById("message")
-    .textContent = message;
-
-}
+  }
 
 
-/* REASONS */
+  try {
 
-if (reasons) {
-
-  const reasonsContainer =
-    document.getElementById("reasons");
-
-  const reasonList =
-    reasons.split("||");
-
-  reasonList.forEach(function(reason) {
-
-    const div =
-      document.createElement("div");
-
-    div.className = "reason";
-
-    div.textContent =
-      "❤️ " + reason;
-
-    reasonsContainer.appendChild(div);
-
-  });
-
-}
+    const proposalRef =
+      doc(
+        db,
+        "proposals",
+        proposalId
+      );
 
 
-/* FINAL MESSAGE */
-
-if (finalMessage) {
-
-  document.getElementById("finalMessage")
-    .textContent = finalMessage;
-
-}
+    const proposalSnap =
+      await getDoc(proposalRef);
 
 
-/* PHOTOS */
+    if (!proposalSnap.exists()) {
 
-function loadPhoto(id) {
+      document.getElementById("message")
+        .textContent =
+        "Sorry, this proposal could not be found. 💔";
 
-  const url =
-    params.get(id);
+      return;
 
-  if (url && url.trim() !== "") {
+    }
 
-    const img =
-      document.getElementById(id);
 
-    img.src = url;
+    const data =
+      proposalSnap.data();
 
-    img.style.display = "block";
 
-    img.onerror = function() {
 
-      img.style.display = "none";
+    /* NAME */
 
-    };
+    if (data.name) {
+
+      document
+        .getElementById("name")
+        .textContent =
+        data.name;
+
+    }
+
+
+
+    /* MESSAGE */
+
+    if (data.message) {
+
+      document
+        .getElementById("message")
+        .textContent =
+        data.message;
+
+    }
+
+
+
+    /* REASONS */
+
+    const reasonsContainer =
+      document
+        .getElementById("reasons");
+
+
+    reasonsContainer.innerHTML = "";
+
+
+    if (
+      data.reasons &&
+      Array.isArray(data.reasons)
+    ) {
+
+      data.reasons.forEach(
+        function(reason) {
+
+          const div =
+            document.createElement("div");
+
+          div.className =
+            "reason";
+
+          div.textContent =
+            "❤️ " + reason;
+
+          reasonsContainer
+            .appendChild(div);
+
+        }
+      );
+
+    }
+
+
+
+    /* FINAL MESSAGE */
+
+    if (data.finalMessage) {
+
+      document
+        .getElementById("finalMessage")
+        .textContent =
+        data.finalMessage;
+
+    }
+
+
+  } catch (error) {
+
+    console.error(
+      "Error loading proposal:",
+      error
+    );
+
+
+    document
+      .getElementById("message")
+      .textContent =
+      "Something went wrong loading this proposal. 💔";
 
   }
 
 }
 
-loadPhoto("photo1");
-loadPhoto("photo2");
-loadPhoto("photo3");
+
+loadProposal();
 
 
-/* YES */
 
-function sayYes() {
+/* =========================
+   YES
+========================= */
 
-  document.getElementById("success")
-    .style.display = "block";
+window.sayYes =
+function() {
+
+  document
+    .getElementById("success")
+    .style.display =
+    "block";
+
 
   createHearts();
+
 
   window.scrollTo({
 
     top:
       document.body.scrollHeight,
 
-    behavior: "smooth"
+    behavior:
+      "smooth"
 
   });
 
-}
+};
 
 
-/* NO */
 
-function sayNo() {
+/* =========================
+   NO BUTTON
+========================= */
+
+let noClicks = 0;
+
+
+window.sayNo =
+function() {
 
   const button =
     document.getElementById("noButton");
 
-  const maxX = 120;
 
-  const maxY = 50;
+  noClicks++;
+
+
+  const maxX =
+    Math.min(
+      150 + noClicks * 10,
+      220
+    );
+
+
+  const maxY =
+    Math.min(
+      60 + noClicks * 5,
+      100
+    );
+
 
   const x =
-    Math.random() * maxX - maxX / 2;
+    Math.random() * maxX -
+    maxX / 2;
+
 
   const y =
-    Math.random() * maxY - maxY / 2;
+    Math.random() * maxY -
+    maxY / 2;
+
+
+  const scale =
+    Math.max(
+      1 - noClicks * 0.12,
+      0.35
+    );
+
 
   button.style.transform =
-    `translate(${x}px, ${y}px)`;
-
-}
+    `translate(${x}px, ${y}px) scale(${scale})`;
 
 
-/* HEARTS */
+  if (noClicks >= 6) {
+
+    button.textContent =
+      "No? 🥺";
+
+
+  }
+
+
+  if (noClicks >= 9) {
+
+    button.textContent =
+      "Okay... 😭";
+
+  }
+
+};
+
+
+
+/* =========================
+   HEARTS
+========================= */
 
 function createHearts() {
 
-  for (let i = 0; i < 20; i++) {
+  for (
+    let i = 0;
+    i < 20;
+    i++
+  ) {
 
     const heart =
       document.createElement("div");
 
+
     heart.className =
       "floating";
+
 
     heart.textContent =
       "❤️";
 
+
     heart.style.left =
-      Math.random() * 100 + "vw";
+      Math.random() * 100 +
+      "vw";
+
 
     heart.style.bottom =
       "-30px";
 
+
     heart.style.animationDelay =
-      Math.random() * 2 + "s";
+      Math.random() * 2 +
+      "s";
 
-    document.body.appendChild(heart);
 
-    setTimeout(function() {
+    document.body
+      .appendChild(heart);
 
-      heart.remove();
 
-    }, 6000);
+    setTimeout(
+      function() {
+
+        heart.remove();
+
+      },
+      6000
+    );
 
   }
 
 }
+
 
 </script>
 
