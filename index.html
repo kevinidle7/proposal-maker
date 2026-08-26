@@ -3,14 +3,11 @@
 
 <head>
   <meta charset="UTF-8">
-
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Proposal Maker 💌</title>
 
   <style>
-
     @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Pacifico&display=swap');
 
     * {
@@ -20,11 +17,7 @@
     body {
       margin: 0;
       font-family: 'DM Sans', sans-serif;
-      background: linear-gradient(
-        135deg,
-        #fff0f5,
-        #ffe1eb
-      );
+      background: linear-gradient(135deg, #fff0f5, #ffe1eb);
       color: #333;
     }
 
@@ -60,7 +53,6 @@
     h2 {
       color: #e91e63;
       margin-top: 0;
-      font-weight: 700;
     }
 
     label {
@@ -127,11 +119,6 @@
       font-size: 19px;
       font-weight: 700;
       cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .generate:hover {
-      transform: scale(1.02);
     }
 
     #result {
@@ -157,7 +144,6 @@
       border-radius: 25px;
       background: #333;
       color: white;
-      font-family: 'DM Sans', sans-serif;
       font-size: 16px;
       cursor: pointer;
     }
@@ -167,11 +153,8 @@
       color: #e91e63;
       font-weight: 600;
     }
-
   </style>
-
 </head>
-
 
 <body>
 
@@ -183,84 +166,45 @@
     Create a cute surprise for someone special ❤️
   </p>
 
-
-  <!-- PERSONAL INFORMATION -->
+  <!-- STEP 1 -->
 
   <div class="card">
 
     <h2>✨ Step 1 — Make It Personal</h2>
 
     <label>Her Name 💕</label>
-
-    <input
-      id="name"
-      type="text"
-      placeholder="e.g. Sarah">
-
+    <input id="name" type="text" placeholder="e.g. Sarah">
 
     <label>Your Email 📩</label>
-
-    <input
-      id="creatorEmail"
-      type="email"
-      placeholder="your@email.com">
-
+    <input id="creatorEmail" type="email" placeholder="your@email.com">
 
     <label>Your Special Message 💌</label>
-
     <textarea
       id="message"
       placeholder="Write something from your heart..."></textarea>
 
+    <label>Reason #1 ❤️ <small>(optional)</small></label>
+    <input id="reason1" type="text" placeholder="One thing you love about her">
 
-    <label>Reason #1 ❤️</label>
+    <label>Reason #2 ❤️ <small>(optional)</small></label>
+    <input id="reason2" type="text" placeholder="Another reason">
 
-    <input
-      id="reason1"
-      type="text"
-      placeholder="One thing you love about her">
+    <label>Reason #3 ❤️ <small>(optional)</small></label>
+    <input id="reason3" type="text" placeholder="Another reason">
 
+    <label>Reason #4 ❤️ <small>(optional)</small></label>
+    <input id="reason4" type="text" placeholder="Another reason">
 
-    <label>Reason #2 ❤️</label>
-
-    <input
-      id="reason2"
-      type="text"
-      placeholder="Another reason">
-
-
-    <label>Reason #3 ❤️</label>
-
-    <input
-      id="reason3"
-      type="text"
-      placeholder="Another reason">
-
-
-    <label>Reason #4 ❤️</label>
-
-    <input
-      id="reason4"
-      type="text"
-      placeholder="Another reason">
-
-
-    <label>Reason #5 ❤️</label>
-
-    <input
-      id="reason5"
-      type="text"
-      placeholder="Another reason">
+    <label>Reason #5 ❤️ <small>(optional)</small></label>
+    <input id="reason5" type="text" placeholder="Another reason">
 
   </div>
-
 
   <!-- PHOTOS -->
 
   <div class="card">
 
     <h2>📸 Step 2 — Add Your Photos</h2>
-
 
     <div class="photo-box">
 
@@ -277,7 +221,6 @@
 
     </div>
 
-
     <div class="photo-box">
 
       <label>Photo 2</label>
@@ -292,7 +235,6 @@
         class="photo-preview">
 
     </div>
-
 
     <div class="photo-box">
 
@@ -309,13 +251,11 @@
 
     </div>
 
-
     <p class="photo-note">
-      📱 Tap a box to choose a photo from your gallery.
+      📱 Choose up to 3 photos from your gallery.
     </p>
 
   </div>
-
 
   <!-- FINAL MESSAGE -->
 
@@ -323,25 +263,21 @@
 
     <h2>🎉 Step 3 — The YES Message</h2>
 
-
     <label>
       Message after she presses YES ❤️
     </label>
-
 
     <textarea
       id="final"
       placeholder="Write your congratulations message..."></textarea>
 
-
     <button
       class="generate"
       onclick="generateLink()">
 
-      💕 Generate My Proposal
+      💕 Continue to Proposal
 
     </button>
-
 
     <div id="result">
 
@@ -352,7 +288,6 @@
       </p>
 
       <p id="link"></p>
-
 
       <button
         class="copy"
@@ -371,14 +306,12 @@
 
 <script type="module">
 
-
 /* =========================
    FIREBASE
 ========================= */
 
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-
 
 import {
   getFirestore,
@@ -391,7 +324,7 @@ from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 const firebaseConfig = {
 
   apiKey:
-    "AIzaSyCyClGyrH2ZTFV-UagawzRaDqkmu1AZSXY",
+    "AIzaSyCyClGyrH2ZTFV-UagawzRaDqmu1AZSXY",
 
   authDomain:
     "proposal-maker-2caa1.firebaseapp.com",
@@ -414,10 +347,8 @@ const firebaseConfig = {
 const app =
   initializeApp(firebaseConfig);
 
-
 const db =
   getFirestore(app);
-
 
 
 /* =========================
@@ -432,7 +363,6 @@ function previewPhoto(inputId, previewId) {
   const preview =
     document.getElementById(previewId);
 
-
   input.addEventListener(
     "change",
     function() {
@@ -440,20 +370,15 @@ function previewPhoto(inputId, previewId) {
       const file =
         this.files[0];
 
-
       if (!file) {
 
-        preview.style.display =
-          "none";
+        preview.style.display = "none";
 
         return;
-
       }
-
 
       const reader =
         new FileReader();
-
 
       reader.onload =
         function(event) {
@@ -466,7 +391,6 @@ function previewPhoto(inputId, previewId) {
 
         };
 
-
       reader.readAsDataURL(file);
 
     }
@@ -476,15 +400,12 @@ function previewPhoto(inputId, previewId) {
 
 
 previewPhoto("photo1", "preview1");
-
 previewPhoto("photo2", "preview2");
-
 previewPhoto("photo3", "preview3");
 
 
-
 /* =========================
-   GENERATE LINK
+   GENERATE PROPOSAL
 ========================= */
 
 async function generateLink() {
@@ -495,15 +416,13 @@ async function generateLink() {
       .value
       .trim();
 
-
   if (!creatorEmail) {
 
     alert(
-      "Please enter your email so you can know when she says YES ❤️"
+      "Please enter your email ❤️"
     );
 
     return;
-
   }
 
 
@@ -512,7 +431,6 @@ async function generateLink() {
       .getElementById("name")
       .value
       .trim();
-
 
   const message =
     document
@@ -523,34 +441,13 @@ async function generateLink() {
 
   const reasons = [
 
-    document
-      .getElementById("reason1")
-      .value
-      .trim(),
+    document.getElementById("reason1").value.trim(),
+    document.getElementById("reason2").value.trim(),
+    document.getElementById("reason3").value.trim(),
+    document.getElementById("reason4").value.trim(),
+    document.getElementById("reason5").value.trim()
 
-    document
-      .getElementById("reason2")
-      .value
-      .trim(),
-
-    document
-      .getElementById("reason3")
-      .value
-      .trim(),
-
-    document
-      .getElementById("reason4")
-      .value
-      .trim(),
-
-    document
-      .getElementById("reason5")
-      .value
-      .trim()
-
-  ].filter(
-    reason => reason !== ""
-  );
+  ].filter(reason => reason !== "");
 
 
   const finalMessage =
@@ -567,20 +464,15 @@ async function generateLink() {
         collection(db, "proposals"),
         {
 
-          name:
-            name,
+          name: name,
 
-          creatorEmail:
-            creatorEmail,
+          creatorEmail: creatorEmail,
 
-          message:
-            message,
+          message: message,
 
-          reasons:
-            reasons,
+          reasons: reasons,
 
-          finalMessage:
-            finalMessage,
+          finalMessage: finalMessage,
 
           createdAt:
             new Date().toISOString()
@@ -597,14 +489,12 @@ async function generateLink() {
 
     document
       .getElementById("link")
-      .textContent =
-      link;
+      .textContent = link;
 
 
     document
       .getElementById("result")
-      .style.display =
-      "block";
+      .style.display = "block";
 
 
     window.scrollTo({
@@ -617,14 +507,14 @@ async function generateLink() {
 
     });
 
+  }
 
-  } catch (error) {
+  catch (error) {
 
     console.error(
       "Firebase error:",
       error
     );
-
 
     alert(
       "Something went wrong saving your proposal. Please try again."
@@ -633,7 +523,6 @@ async function generateLink() {
   }
 
 }
-
 
 
 /* =========================
@@ -647,16 +536,10 @@ function copyLink() {
       .getElementById("link")
       .textContent;
 
-
-  if (!link) {
-
-    return;
-
-  }
+  if (!link) return;
 
 
-  navigator
-    .clipboard
+  navigator.clipboard
     .writeText(link)
 
     .then(function() {
@@ -678,22 +561,13 @@ function copyLink() {
 }
 
 
-
-/* =========================
-   MAKE BUTTONS WORK
-========================= */
-
 window.generateLink =
   generateLink;
-
 
 window.copyLink =
   copyLink;
 
-
 </script>
 
-
 </body>
-
 </html>
